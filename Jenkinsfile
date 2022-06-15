@@ -1,40 +1,11 @@
 pipeline {
-    options
-    {
-        disableConcurrentBuilds()
-        ansiColor('xterm')
-        skipStagesAfterUnstable()
-        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '2'))
-    }
-    environment {
-     TERRAFORM_VERSION = "0.14.10"
-     PYTHON_VERSION = "3.6"
-   }
-    parameters
-    {
-        choice(
-            choices:'nonprod',
-            description:'Profile name',
-            name:'profile')
-        string(name: 'role', defaultValue: 'arn:aws:iam::165387667510:role/AWS_165387667510_Owner', description: 'What role should I use?')
-
-    }
-    agent
+       agent
     {
         node {
         label 'docker-kitchensink-slave'
         }
 
     }
-    stages
-    {
-        stage('Checkout')
-        {
-            steps
-            {
-                checkout scm
-            }
-        }
         stage('Configure AWS')
         {
             steps
