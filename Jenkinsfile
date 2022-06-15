@@ -11,8 +11,7 @@ pipeline {
             steps
             {
                 script {
-                    def credentialId = "aws-key"
-                    withCredentials([usernamePassword(credentialsId: "${credentialId}", usernameVariable: 'USER', passwordVariable: 'PASS')])
+
                     {
                         sh """
                             echo "Hello World Pravin"
